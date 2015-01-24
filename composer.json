@@ -17,7 +17,9 @@
         }
     },
     "require": {
-        "php": ">=5.4"
+        "php": ">=5.4",
+        "raphhh/puppy-config": "~1.1",
+        "twig/twig": "~1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "@stable"
