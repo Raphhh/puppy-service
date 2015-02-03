@@ -1,7 +1,6 @@
 <?php
 namespace Puppy\Service;
 
-use Puppy\Service\resources\ConfigMock;
 
 /**
  * Class SessionTest
@@ -13,7 +12,7 @@ class SessionTest extends \PHPUnit_Framework_TestCase
     public function test__invoke()
     {
         try{
-            $session = new Session(new ConfigMock([]));
+            $session = new Session(new \ArrayObject([]));
             /**
              * @var \Symfony\Component\HttpFoundation\Session\Session $result
              */
