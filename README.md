@@ -1,4 +1,4 @@
-# PHP Lib Bootstrap
+# Puppy Service
 
 [![Latest Stable Version](https://poser.pugx.org/raphhh/puppy-service/v/stable.svg)](https://packagist.org/packages/raphhh/puppy-service)
 [![Build Status](https://travis-ci.org/Raphhh/puppy-service.png)](https://travis-ci.org/Raphhh/puppy-service)
@@ -10,35 +10,20 @@
 [![Reference Status](https://www.versioneye.com/php/raphhh:puppy-service/reference_badge.svg?style=flat)](https://www.versioneye.com/php/raphhh:puppy-service/references)
 [![License](https://poser.pugx.org/raphhh/puppy-service/license.svg)](https://packagist.org/packages/raphhh/puppy-service)
 
-A bootstrap for a lib in PHP. Don't set, just code!  
+Basic services for Puppy framework.
 
-This bootstrap will install all the basic files and settings to start a PHP library. 
+## Session
+
+Service for Symfony\Component\HttpFoundation\Session\Session.
 
 
-## Installation
+## Template
 
+Service for Twig_Environment.
 
-First, use composer to create your project. (Note that composer will also create all the repositories if they do not exist.)
+Note that the services are accessible in twig templates with the global variable "service".
 
-```
-$ composer create-project raphhh/puppy-service path/to/my/project
-```
-
-Go into your project.
-
-```
-$ cd path/to/my/project
-```
-
-Finally, run PHPUnit to test the installation.
-
-```
-$ ./vendor/bin/phpunit
-```
-
-## Customisation
-
-If tests are ok, that means you can start your project.
-You just need to replace composer.json and README.md with your specific info.
-
-After this customisation, just code.
+### Config options
+ - 'template.directory.main' => path to the directory of the template files.
+ - 'template.directory.cache' => path to the directory of the cache of the template files.
+ - 'template.debug' => indicates if the debug mode is enable in the template.
