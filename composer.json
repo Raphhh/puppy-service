@@ -18,7 +18,6 @@
     },
     "require": {
         "php": ">=5.4",
-        "raphhh/puppy-config": "@dev",
         "twig/twig": "~1.0",
         "symfony/http-foundation": "~2.6"
     },

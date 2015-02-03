@@ -1,7 +1,6 @@
 <?php
 namespace Puppy\Service;
 
-use Puppy\Config\IConfig;
 use Twig_Environment;
 use Twig_Loader_Filesystem;
 
@@ -31,31 +30,37 @@ class Template
     }
 
     /**
-     * @param IConfig $config
+     * @param \ArrayAccess $config
      * @throws \InvalidArgumentException
      */
-    private function validConfig(IConfig $config)
+    private function validConfig(\ArrayAccess $config)
     {
-        if (!$config->get('template.directory.main')) {
+        if (empty($config['template.directory.main'])) {
             throw new \InvalidArgumentException(
                 'Config must define the key "template.directory.main" for the path to the template files'
+            );
+        }
+
+        if (empty($config['template.directory.cache'])) {
+            throw new \InvalidArgumentException(
+                'Config must define the key "template.directory.cache" for the path to the template cache'
             );
         }
     }
 
     /**
-     * @param IConfig $config
+     * @param \ArrayAccess $config
      * @return $this
      */
-    private function buildTwig(IConfig $config)
+    private function buildTwig(\ArrayAccess $config)
     {
         $this->validConfig($config);
 
         $this->twig = new Twig_Environment(
-            new Twig_Loader_Filesystem($config->get('template.directory.main')),
+            new Twig_Loader_Filesystem($config['template.directory.main']),
             array(
-                'cache' => $config->get('template.directory.cache'),
-                'debug' => (bool)$config->get('template.debug'),
+                'cache' => $config['template.directory.cache'],
+                'debug' => !empty($config['template.debug']),
                 'strict_variables' => true,
             )
         );
