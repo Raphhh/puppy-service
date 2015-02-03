@@ -12,6 +12,13 @@
 
 Basic services for Puppy framework.
 
+
+## Installation
+
+```
+$ composer require raphhh/puppy-service
+```
+
 ## Session
 
 Service for Symfony\Component\HttpFoundation\Session\Session.
