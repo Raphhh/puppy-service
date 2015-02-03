@@ -11,63 +11,60 @@ use Puppy\Service\resources\ConfigMock;
 class TemplateTest extends \PHPUnit_Framework_TestCase
 {
 
+    public function test__invokeWithoutConfig()
+    {
+        $template = new Template();
+        $this->setExpectedException(
+            'InvalidArgumentException',
+            'Service "config" not found'
+        );
+        $template(new \ArrayObject());
+    }
+
     public function test__invokeWithoutConfigForDirectoryMain()
     {
+        $template = new Template();
         $this->setExpectedException(
             'InvalidArgumentException',
             'Config must define the key "template.directory.main" for the path to the template files'
         );
-        new Template(new ConfigMock([]));
-    }
-
-    public function test__invokeWithoutConfigForDirectoryCache()
-    {
-        $this->setExpectedException(
-            'InvalidArgumentException',
-            'Config must define the key "template.directory.cache" for the path to the template cache'
-        );
-        new Template(new ConfigMock([
-            'template.directory.main' => 'main',
-        ]));
+        $template(new \ArrayObject(['config' => new ConfigMock([])]));
     }
 
     public function test__invoke()
     {
-        $template = new Template(new ConfigMock([
-            'template.directory.main' => __DIR__,
-            'template.directory.cache' => __DIR__,
-        ]));
+        $template = new Template();
         /**
          * @var \Twig_Environment $result
          */
-        $result = $template();
+        $result = $template(new \ArrayObject(['config' => new ConfigMock([
+            'template.directory.main' => __DIR__,
+        ])]));
         $this->assertInstanceOf('Twig_Environment', $result);
     }
 
     public function test__invokeWithDefaultDebugMode()
     {
-        $template = new Template(new ConfigMock([
-            'template.directory.main' => __DIR__,
-            'template.directory.cache' => __DIR__,
-        ]));
+        $template = new Template();
         /**
          * @var \Twig_Environment $result
          */
-        $result = $template();
+        $result = $template(new \ArrayObject(['config' => new ConfigMock([
+            'template.directory.main' => __DIR__,
+        ])]));
         $this->assertFalse($result->isDebug());
     }
 
     public function test__invokeWithDebugMode()
     {
-        $template = new Template(new ConfigMock([
-            'template.directory.main' => __DIR__,
-            'template.directory.cache' => __DIR__,
-            'template.debug' => true,
-        ]));
+        $template = new Template();
         /**
          * @var \Twig_Environment $result
          */
-        $result = $template();
+        $result = $template(new \ArrayObject(['config' => new ConfigMock([
+            'template.directory.main' => __DIR__,
+            'template.debug' => true,
+        ])]));
         $this->assertTrue($result->isDebug());
     }
 }
