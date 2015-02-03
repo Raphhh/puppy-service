@@ -1,6 +1,6 @@
 {
     "name": "raphhh/puppy-service",
-    "description": "A bootstrap for a PHP lib, including basic common files and settings",
+    "description": "Services for Puppy framework",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -9,7 +9,7 @@
             "email": "raphael@raphaellefebvre.be"
         }
     ],
-    "keywords": ["bootstrap"],
+    "keywords": ["puppy"],
     "homepage": "https://github.com/Raphhh/puppy-service",
     "autoload": {
         "psr-4": {
