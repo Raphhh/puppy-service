@@ -28,7 +28,7 @@ Service for Symfony\Component\HttpFoundation\Session\Session.
 
 Service for Twig_Environment.
 
-Note that the services are accessible in twig templates with the global variable "service".
+Note that the services are accessible in twig templates with the global variable "services".
 
 ### Config options
  - 'template.directory.main' => path to the directory of the template files.
