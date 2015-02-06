@@ -2,6 +2,7 @@
 namespace Puppy\Service;
 
 use Twig_Environment;
+use Twig_Extension_Debug;
 use Twig_Loader_Filesystem;
 
 /**
@@ -26,7 +27,7 @@ class Template
         if (empty($services['config'])) {
             throw new \InvalidArgumentException('Service "config" not found');
         }
-        return $this->buildTwig($services['config'])->addGlobals($services)->twig;
+        return $this->buildTwig($services['config'])->addContext($services)->twig;
     }
 
     /**
@@ -72,8 +73,9 @@ class Template
      * @param \ArrayAccess $services
      * @return $this
      */
-    private function addGlobals(\ArrayAccess $services)
+    private function addContext(\ArrayAccess $services)
     {
+        $this->twig->addExtension(new Twig_Extension_Debug());
         $this->twig->addGlobal('services', $services);
         return $this;
     }
