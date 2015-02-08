@@ -54,6 +54,19 @@ class TemplateTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Twig_Environment', $result);
     }
 
+    public function test__invokeWithNoCache()
+    {
+        $template = new Template();
+        /**
+         * @var \Twig_Environment $result
+         */
+        $result = $template(new \ArrayObject(['config' => new \ArrayObject([
+            'template.directory.main' => __DIR__,
+            'template.directory.cache' => false,
+        ])]));
+        $this->assertInstanceOf('Twig_Environment', $result);
+    }
+
     public function test__invokeWithDefaultDebugMode()
     {
         $template = new Template();

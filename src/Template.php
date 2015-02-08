@@ -42,7 +42,7 @@ class Template
             );
         }
 
-        if (empty($config['template.directory.cache'])) {
+        if (!isset($config['template.directory.cache'])) {
             throw new \InvalidArgumentException(
                 'Config must define the key "template.directory.cache" for the path to the template cache'
             );
