@@ -8,6 +8,18 @@ namespace Puppy\Service;
  */
 class SessionTest extends \PHPUnit_Framework_TestCase
 {
+
+    public function test__invokeWithoutConfig()
+    {
+        $template = new Session();
+        $this->setExpectedException(
+            'InvalidArgumentException',
+            'Service "config" not found'
+        );
+        $template(new \ArrayObject());
+    }
+
+
     public function test__invoke()
     {
         $services = new \ArrayObject();

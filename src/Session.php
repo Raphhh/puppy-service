@@ -15,10 +15,15 @@ class Session
 {
     /**
      * @param \ArrayAccess $services
+     * @throws \InvalidArgumentException
      * @return SymfonySession
      */
     public function __invoke(\ArrayAccess $services)
     {
+        if (empty($services['config'])) {
+            throw new \InvalidArgumentException('Service "config" not found');
+        }
+
         $session = new SymfonySession(
             $this->getSessionStorage($services['config']),
             $this->getAttributeBag($services['config']),
