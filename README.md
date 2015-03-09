@@ -33,3 +33,6 @@ Note that the services are accessible in twig templates with the global variable
  - 'template.directory.main' => path to the directory of the template files.
  - 'template.directory.cache' => path to the directory of the cache of the template files.
  - 'template.debug' => indicates if the debug mode is enable in the template.
+ - 'session.sessionStorageClass' => name of the class to handle the session storage.
+ - 'session.attributeBagClass' => name of the class to handle the attributes session.
+ - 'session.flashBagClass' => name of the class to handle the flash session.
