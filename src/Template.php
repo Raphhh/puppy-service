@@ -3,6 +3,7 @@ namespace Puppy\Service;
 
 use Twig_Environment;
 use Twig_Extension_Debug;
+use Twig_ExtensionInterface;
 use Twig_Loader_Filesystem;
 
 /**
@@ -18,6 +19,19 @@ class Template
     private $twig;
 
     /**
+     * @var Twig_ExtensionInterface[]
+     */
+    private $extensions;
+
+    /**
+     * @param array $extensions
+     */
+    public function __construct(array $extensions = [])
+    {
+        $this->setExtensions($extensions);
+    }
+
+    /**
      * @param \ArrayAccess $services
      * @throws \InvalidArgumentException
      * @return Twig_Environment
@@ -27,7 +41,7 @@ class Template
         if (empty($services['config'])) {
             throw new \InvalidArgumentException('Service "config" not found');
         }
-        return $this->buildTwig($services['config'])->addContext($services)->twig;
+        return $this->buildTwig($services['config'])->initExtensions()->twig;
     }
 
     /**
@@ -70,13 +84,34 @@ class Template
     }
 
     /**
-     * @param \ArrayAccess $services
      * @return $this
      */
-    private function addContext(\ArrayAccess $services)
+    private function initExtensions()
     {
         $this->twig->addExtension(new Twig_Extension_Debug());
-        $this->twig->addGlobal('services', $services);
+        foreach($this->getExtensions() as $extensions){
+            $this->twig->addExtension($extensions);
+        }
         return $this;
+    }
+
+    /**
+     * Getter of $extensions
+     *
+     * @return array
+     */
+    private function getExtensions()
+    {
+        return $this->extensions;
+    }
+
+    /**
+     * Setter of $extensions
+     *
+     * @param array $extensions
+     */
+    private function setExtensions(array $extensions)
+    {
+        $this->extensions = $extensions;
     }
 }
