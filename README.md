@@ -29,10 +29,17 @@ Service for Twig_Environment.
 
 Note that the services are accessible in twig templates with the global variable "services".
 
+Twig has also a filter "link". This filter prepends the config "baseUrl" to a link.
+
+```twig
+<a href="{{ my/page|link }}">click here</a>
+```
+
 ### Config options
  - 'template.directory.main' => path to the directory of the template files.
  - 'template.directory.cache' => path to the directory of the cache of the template files.
  - 'template.debug' => indicates if the debug mode is enable in the template.
+ - 'baseUrl' => gives the base url to apply for the twig filter "link". 
  - 'session.sessionStorageClass' => name of the class to handle the session storage.
  - 'session.attributeBagClass' => name of the class to handle the attributes session.
  - 'session.flashBagClass' => name of the class to handle the flash session.
