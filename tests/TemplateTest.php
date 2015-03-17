@@ -1,6 +1,8 @@
 <?php
 namespace Puppy\Service;
 
+use Puppy\Service\Twig\TwigExtension;
+
 /**
  * Class TemplateTest
  * @package Puppy\Service
@@ -92,6 +94,35 @@ class TemplateTest extends \PHPUnit_Framework_TestCase
             'template.debug' => true,
         ])]));
         $this->assertTrue($result->isDebug());
+    }
+
+    public function testInitExtensionsWithDefaultExtension()
+    {
+        $template = new Template();
+        /**
+         * @var \Twig_Environment $twig
+         */
+        $twig = $template(new \ArrayObject(['config' => new \ArrayObject([
+            'template.directory.main' => __DIR__,
+            'template.directory.cache' => __DIR__,
+        ])]));
+
+        $this->assertCount(4, $twig->getExtensions());
+    }
+
+    public function testInitExtensionsWithAdditionalExtension()
+    {
+        $template = new Template([new TwigExtension(new \ArrayObject())]);
+
+        /**
+         * @var \Twig_Environment $twig
+         */
+        $twig = $template(new \ArrayObject(['config' => new \ArrayObject([
+            'template.directory.main' => __DIR__,
+            'template.directory.cache' => __DIR__,
+        ])]));
+
+        $this->assertCount(5, $twig->getExtensions());
     }
 }
  
