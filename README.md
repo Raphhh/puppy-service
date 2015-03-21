@@ -32,7 +32,7 @@ Note that the services are accessible in twig templates with the global variable
 Twig has also a filter "link". This filter prepends the config "baseUrl" to a link.
 
 ```twig
-<a href="{{ my/page|link }}">click here</a>
+<a href="{{ 'my/page'|link }}">click here</a>
 ```
 
 ### Config options
